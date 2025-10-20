@@ -15,6 +15,12 @@ def query(sql: str) -> List[Dict[str, Any]]:
     with get_conn() as conn:
         rows = conn.execute(sql).fetchall()
         return [dict(r) for r in rows]
+    
+def query_params(sql: str, params: tuple):
+    with get_conn() as conn:
+        rows = conn.execute(sql, params).fetchall()
+        return [dict(r) for r in rows]
+
 
 def query_one(sql: str) -> Optional[Dict[str, Any]]:
     with get_conn() as conn:
